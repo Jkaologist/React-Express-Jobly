@@ -1,13 +1,13 @@
 import {NavLink} from "react-router-dom";
 
-function NavBar(props) {
+function NavBar() {
 
   return (
     <div>
-      <NavLink>
+      <NavLink to="/login">
         Login
       </NavLink>
-      <NavLink>
+      <NavLink to="/signup">
         Sign Up
       </NavLink>
     </div>

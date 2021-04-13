@@ -1,16 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-
+import {useState} from "react"
 import {BrowserRouter, Route} from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
+import JoblyApi from "./api";
 
 function App() {
+  const [user, setUser] = useState({loggedIn: false});
+
+  async function login(formData) {
+    let res = await JoblyApi.login(formData);
+    if (!res.error) {
+      setUser(user => ({...user, loggedIn: true, token: res}));
+    } else {
+    console.alert("You failed to login.")
+    }
+  }
+
+
   return (
     <BrowserRouter>
       <NavBar />
-      <Routes />
+      <Routes login={login}/>
     </BrowserRouter>
   );
 }

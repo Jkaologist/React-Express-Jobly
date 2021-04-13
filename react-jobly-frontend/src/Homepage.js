@@ -1,9 +1,14 @@
+import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
     <div>
-      <h3>Login</h3>
-      <h3>Sign Up</h3>
+      <Link to="/login">
+      <button>Login</button>
+      </Link>
+      <Link to="/signup">
+      <button>Sign Up</button>
+      </Link>
     </div>
   )
 }

@@ -1,13 +1,25 @@
 import {useState, useEffect} from "react";
-function LogInForm() {
+function LogInForm({login}) {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: ""
+  })
+  function handleSubmit(e) {
+    e.preventDefault()
+    login(formData)
+  }
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setFormData(formData => ({ ...formData, [name]: value }));
 
-  
+  }
   return (
     <form id="loginForm" onSubmit={handleSubmit}>
       <label htmlFor="username">Username</label>
-      <input name="username"></input>
+      <input name="username" value={formData.username} onChange={handleChange} required></input>
       <label htmlFor="password">Password</label>
-      <input name="password"></input>
+      <input name="password" value={formData.password} onChange={handleChange} required></input>
+      <button onSubmit={handleSubmit}>Submit!</button>
     </form>
   )
 }

@@ -3,22 +3,20 @@ import Homepage from "./Homepage";
 import LogInForm from "./LogInForm";
 import SignupForm from "./SignupForm";
 
-function Routes() {
+function Routes({login}) {
 
   return (
     <div>
       <Switch>
-    
         <Route exact path="/">
         <Homepage />
         </Route>
-        <Route>
-          <LogInForm />
+        <Route exact path="/login">
+          <LogInForm login={login}/>
         </Route>
-        <Route>
+        <Route exact path="/signup">
           <SignupForm />
         </Route>
-
       </Switch>
     </div>
   )

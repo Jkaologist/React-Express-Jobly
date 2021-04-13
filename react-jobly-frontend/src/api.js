@@ -40,6 +40,19 @@ class JoblyApi {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
+  /** Sign a user up. */
+
+  static async signup(formData) {
+    let res = await this.request(`auth/register`, formData, "post");
+    return res.token;
+  }
+
+  /** Log in a user. */
+
+  static async login(formData) {
+    let res = await this.request(`auth/login`, formData, "post");
+    return res.token;
+  }
 
   // obviously, you'll add a lot here ...
 }
@@ -48,3 +61,5 @@ class JoblyApi {
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+
+export default JoblyApi;
