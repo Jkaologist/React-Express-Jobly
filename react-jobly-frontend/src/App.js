@@ -1,26 +1,28 @@
 import './App.css';
 import {useState} from "react"
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, useHistory} from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
 import JoblyApi from "./api";
 
 function App() {
+  const History = useHistory();
+
   const [user, setUser] = useState({loggedIn: false});
 
   async function login(formData) {
     let res = await JoblyApi.login(formData);
     if (!res.error) {
       setUser(user => ({...user, loggedIn: true, token: res}));
+      History.push("/companies");
+
     } else {
     console.alert("You failed to login.")
     }
   }
 
   function isLoggedIn() {
-    if (user.loggedIn) return true
-
-    return false
+    return user.loggedIn
   }
 
   function logOut() {
@@ -38,10 +40,10 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <div>
       <NavBar logOut={logOut} isLoggedIn={isLoggedIn}/>
       <Routes login={login} signup={signup} isLoggedIn={isLoggedIn} />
-    </BrowserRouter>
+    </div>
   );
 }
 

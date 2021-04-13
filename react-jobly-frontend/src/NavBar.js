@@ -4,7 +4,7 @@ function NavBar({isLoggedIn, logOut}) {
 
   return (
     <div>
-      { isLoggedIn ? <div>
+      { isLoggedIn() ? <div>
         <NavLink to="/">
           Home
         </NavLink>

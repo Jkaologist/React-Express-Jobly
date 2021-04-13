@@ -1,8 +1,6 @@
 import {useState, useEffect} from "react";
-import {useHistory} from "react-router-dom";
-function LogInForm({login, isLoggedIn}) {
 
-  const History = useHistory();
+function LogInForm({login, isLoggedIn}) {
   const [formData, setFormData] = useState({
     username: "",
     password: ""
@@ -11,9 +9,6 @@ function LogInForm({login, isLoggedIn}) {
     e.preventDefault()
     login(formData)
     console.log("is logged in?", isLoggedIn());
-    if (isLoggedIn()) {
-      History.push("/companies");
-    }
   }
   function handleChange(e) {
     const {name, value} = e.target;
