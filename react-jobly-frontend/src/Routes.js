@@ -3,6 +3,8 @@ import Companies from "./Companies";
 import Homepage from "./Homepage";
 import LogInForm from "./LogInForm";
 import SignupForm from "./SignupForm";
+import CompanyDetail from "./CompanyDetail";
+
 
 function Routes({login, isLoggedIn, signup}) {
 
@@ -20,6 +22,9 @@ function Routes({login, isLoggedIn, signup}) {
         </Route>
         <Route exact path="/companies">
           <Companies isLoggedIn={isLoggedIn}/>
+        </Route>
+        <Route exact path="/companies/:handle">
+          <CompanyDetail isLoggedIn={isLoggedIn}/>
         </Route>
       </Switch>
     </div>

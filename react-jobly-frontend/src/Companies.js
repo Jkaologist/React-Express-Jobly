@@ -18,7 +18,6 @@ function Companies({isLoggedIn}) {
 
   async function companyList() {
     let companiesList = await JoblyApi.getCompanies();
-    console.log("The companies", companiesList)
     setCompanies(companiesList);
   }
 
