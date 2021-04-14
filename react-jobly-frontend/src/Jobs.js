@@ -1,18 +1,21 @@
 import {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import {useContext} from "react";
 import JoblyApi from "./api";
 import Loading from "./Loading";
 import JobCard from "./JobCard";
+import UserContext from "./UserContext";
 
-function Jobs({isLoggedIn}) {
-  const History = useHistory();
+function Jobs() {
   const [jobs, setJobs] = useState(null);
+  const History = useHistory();
+  const user = useContext(UserContext);
   
   useEffect(function makeList() {
     jobsList()
   }, [])
 
-  if (!isLoggedIn) {
+  if (!user.loggedIn) {
     History.push("/");
   }
 
@@ -29,7 +32,7 @@ function Jobs({isLoggedIn}) {
     <div>
       {
         jobs.map(j => (
-        <JobCard title={j.title} companyName={j.companyName} salary={j.salary} equity={j.equity}/>
+        <JobCard key={j.id} title={j.title} companyName={j.companyName} salary={j.salary} equity={j.equity}/>
         ))
       }
     </div>

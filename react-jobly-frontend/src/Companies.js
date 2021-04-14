@@ -1,18 +1,20 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
 import JoblyApi from "./api";
 import Loading from "./Loading";
 import CompanyCard from "./CompanyCard";
+import UserContext from "./UserContext";
 
-function Companies({isLoggedIn}) {
+function Companies() {
   const History = useHistory();
   const [companies, setCompanies] = useState(null);
+  const user = useContext(UserContext);
   
   useEffect(function makeList() {
     companyList()
   }, [])
 
-  if (!isLoggedIn) {
+  if (!user.loggedIn) {
     History.push("/");
   }
 

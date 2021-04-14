@@ -21,7 +21,7 @@ function NavBar({isLoggedIn, logOut}) {
           Profile
         </NavLink>
         <p></p>
-        <NavLink to="/logout">
+        <NavLink onClick={(e)=>logOut(e)} to="/">
           Logout
         </NavLink>
       </div> :

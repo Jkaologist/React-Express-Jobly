@@ -1,17 +1,24 @@
-import {useParams} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useParams, useHistory} from "react-router-dom";
+import {useState, useEffect, useContext} from "react";
 import JoblyApi from "./api";
 import Loading from "./Loading";
 import JobCard from "./JobCard";
+import UserContext from "./UserContext";
 
 function CompanyDetail() {
 
   const { handle } = useParams();
   const [company, setCompany] = useState(null);
+  const user = useContext(UserContext);
+  const History = useHistory();
 
   useEffect(function makeList() {
     getCompanyDetail();
-  })
+  },[handle])
+
+  if (!user.loggedIn) {
+    History.push("/");
+  }
 
   async function getCompanyDetail() {
     try{

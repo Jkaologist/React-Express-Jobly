@@ -4,11 +4,13 @@ import {useHistory} from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
 import JoblyApi from "./api";
+import UserContext from "./UserContext";
 
 function App() {
   const History = useHistory();
 
   const [user, setUser] = useState({loggedIn: false});
+
 
   async function login(formData) {
     let res = await JoblyApi.login(formData);
@@ -25,7 +27,8 @@ function App() {
     return user.loggedIn
   }
 
-  function logOut() {
+  function logOut(e) {
+    e.preventDefault();
     setUser(user => ({loggedIn:false}));
   }
 
@@ -41,8 +44,10 @@ function App() {
 
   return (
     <div>
-      <NavBar logOut={logOut} isLoggedIn={isLoggedIn}/>
-      <Routes login={login} signup={signup} isLoggedIn={isLoggedIn} />
+      <UserContext.Provider value={user}>
+        <NavBar logOut={logOut} isLoggedIn={isLoggedIn}/>
+        <Routes login={login} signup={signup} isLoggedIn={isLoggedIn} />
+      </UserContext.Provider>
     </div>
   );
 }

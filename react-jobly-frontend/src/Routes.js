@@ -15,19 +15,19 @@ function Routes({login, isLoggedIn, signup}) {
         <Homepage />
         </Route>
         <Route exact path="/login">
-          <LogInForm login={login} isLoggedIn={isLoggedIn}/>
+          <LogInForm login={login} />
         </Route>
         <Route exact path="/signup">
           <SignupForm signup={signup}/>
         </Route>
         <Route exact path="/companies">
-          <Companies isLoggedIn={isLoggedIn}/>
+          <Companies />
         </Route>
         <Route exact path="/jobs">
-          <Jobs isLoggedIn={isLoggedIn}/>
+          <Jobs />
         </Route>
         <Route exact path="/companies/:handle">
-          <CompanyDetail isLoggedIn={isLoggedIn}/>
+          <CompanyDetail />
         </Route>
       </Switch>
     </div>
