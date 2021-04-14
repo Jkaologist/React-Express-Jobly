@@ -30,7 +30,7 @@ function Companies({isLoggedIn}) {
     <div>
       {
         companies.map(c => (
-        <CompanyCard name={c.name} description={c.description} logoUrl={c.logoUrl}/>
+        <CompanyCard handle={c.handle} name={c.name} description={c.description} logoUrl={c.logoUrl}/>
         ))
       }
     </div>

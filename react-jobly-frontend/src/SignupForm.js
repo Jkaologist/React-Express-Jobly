@@ -21,16 +21,19 @@ function SignupForm({signup}) {
   }
   return (
     <form id="signupForm">
+      <p></p>
       <label htmlFor="username">Username</label>
-      <input name="username"></input>
+      <input name="username" value={formData.username} onChange={handleChange}></input>
       <label htmlFor="password">Password</label>
-      <input name="password"></input>
+      <input name="password" value={formData.password} onChange={handleChange}></input>
       <label htmlFor="fname">First Name</label>
-      <input name="fname"></input>
+      <input name="fname" value={formData.firstName} onChange={handleChange}></input>
       <label htmlFor="lname">Last Name</label>
-      <input name="lname"></input>
+      <input name="lname" value={formData.lastName} onChange={handleChange}></input>
       <label htmlFor="email">Email</label>
-      <input name="email"></input>
+      <input name="email" value={formData.email} onChange={handleChange}></input>
+      <p></p>
+      <button onSubmit={handleSubmit}>Submit!</button>
     </form>
   )
 }

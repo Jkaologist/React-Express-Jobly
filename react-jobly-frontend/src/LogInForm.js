@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
 function LogInForm({login, isLoggedIn}) {
   const [formData, setFormData] = useState({
@@ -17,6 +17,7 @@ function LogInForm({login, isLoggedIn}) {
   }
   return (
     <form id="loginForm" onSubmit={handleSubmit}>
+      <p></p>
       <label htmlFor="username">Username</label>
       <input name="username" value={formData.username} onChange={handleChange} required></input>
       <label htmlFor="password">Password</label>

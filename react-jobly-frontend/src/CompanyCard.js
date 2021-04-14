@@ -1,11 +1,14 @@
-import { useState } from "react";
-import JoblyApi from "./api";
-import loading from "./Loading";
+import { useHistory } from "react-router-dom"
 
-function CompanyCard({name, description, logoUrl}) {
+function CompanyCard({handle, name, description, logoUrl}) {
+  let History = useHistory()
+
+  function routeToCompany() {
+    History.push(`/companies/${handle}`)
+  }
 
   return (
-    <div>
+    <div style={{boxShadow: "0px 1px 5px black", padding: "15px", margin: "15px"}} onClick={routeToCompany}>
       <div>
         name: {name}
       </div>

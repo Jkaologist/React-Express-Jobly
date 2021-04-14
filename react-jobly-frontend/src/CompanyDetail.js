@@ -6,12 +6,10 @@ import JobCard from "./JobCard";
 
 function CompanyDetail() {
 
-  const {handle} = useParams();
-  console.log("handle:", handle);
+  const { handle } = useParams();
   const [company, setCompany] = useState(null);
 
   useEffect(function makeList() {
-    console.log("in the useEffect");
     getCompanyDetail();
   }, [handle])
 
@@ -22,7 +20,6 @@ function CompanyDetail() {
     } catch(e) {
       console.log(e);
     }
-
   }
 
   if (company === null) {
@@ -33,7 +30,7 @@ function CompanyDetail() {
   return (
     <div>
       <h2>{company.name}</h2>
-      <p>{company.detail}</p>
+      <p>{company.description}</p>
       <div>
         {company.jobs.map(job => (
           <JobCard key={job.id} title={job.title} equity={job.equity} salary={job.salary} />

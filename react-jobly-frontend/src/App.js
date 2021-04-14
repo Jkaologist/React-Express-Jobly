@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from "react"
-import {BrowserRouter, Route, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
 import JoblyApi from "./api";
