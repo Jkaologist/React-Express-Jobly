@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-function LogInForm({login, isLoggedIn}) {
+function LogInForm({login}) {
   const [formData, setFormData] = useState({
     username: "",
     password: ""
@@ -8,7 +8,6 @@ function LogInForm({login, isLoggedIn}) {
   function handleSubmit(e) {
     e.preventDefault()
     login(formData)
-    console.log("is logged in?", isLoggedIn());
   }
   function handleChange(e) {
     const {name, value} = e.target;

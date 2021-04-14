@@ -5,8 +5,9 @@ import LogInForm from "./LogInForm";
 import SignupForm from "./SignupForm";
 import CompanyDetail from "./CompanyDetail";
 import Jobs from "./Jobs";
+import Profile from "./Profile";
 
-function Routes({login, isLoggedIn, signup}) {
+function Routes({login, signup, patch}) {
 
   return (
     <div>
@@ -19,6 +20,9 @@ function Routes({login, isLoggedIn, signup}) {
         </Route>
         <Route exact path="/signup">
           <SignupForm signup={signup}/>
+        </Route>
+        <Route exact path="/profile">
+          <Profile patch={patch}/>
         </Route>
         <Route exact path="/companies">
           <Companies />

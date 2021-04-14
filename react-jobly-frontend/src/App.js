@@ -11,13 +11,23 @@ function App() {
 
   const [user, setUser] = useState({loggedIn: false});
 
+  async function patch(formData) {
+    let {username, ...data} = formData;
+    let res = await JoblyApi.patchUser(username, data);
+    if (!res.error) {
+      setUser(user => ({...user, ...res.user}));
+      History.push("/companies")
+    } else {
+    console.alert("You failed to register.")
+    }
+  }
 
   async function login(formData) {
     let res = await JoblyApi.login(formData);
     if (!res.error) {
-      setUser(user => ({...user, loggedIn: true, token: res}));
+      let resp = await JoblyApi.getUser(formData.username)
+      setUser(user => ({...resp.user ,loggedIn: true, token: res}));
       History.push("/companies");
-
     } else {
     console.alert("You failed to login.")
     }
@@ -37,7 +47,7 @@ function App() {
     if (!res.error) {
       setUser(user => ({...user, loggedIn: true, token: res}));
     } else {
-    console.alert("You failed to login.")
+    console.alert("You failed to register.")
     }
   }
 
@@ -45,8 +55,8 @@ function App() {
   return (
     <div>
       <UserContext.Provider value={user}>
-        <NavBar logOut={logOut} isLoggedIn={isLoggedIn}/>
-        <Routes login={login} signup={signup} isLoggedIn={isLoggedIn} />
+        <NavBar logOut={logOut} isLoggedIn={isLoggedIn} patch={patch}/>
+        <Routes login={login} signup={signup} patch={patch} isLoggedIn={isLoggedIn} />
       </UserContext.Provider>
     </div>
   );

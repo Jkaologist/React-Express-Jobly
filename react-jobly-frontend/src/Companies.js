@@ -32,7 +32,7 @@ function Companies() {
     <div>
       {
         companies.map(c => (
-        <CompanyCard handle={c.handle} name={c.name} description={c.description} logoUrl={c.logoUrl}/>
+        <CompanyCard key={c.handle} handle={c.handle} name={c.name} description={c.description} logoUrl={c.logoUrl}/>
         ))
       }
     </div>

@@ -1,6 +1,6 @@
 import {NavLink} from "react-router-dom";
 
-function NavBar({isLoggedIn, logOut}) {
+function NavBar({isLoggedIn, logOut, patch}) {
 
   return (
     <div>
@@ -17,11 +17,11 @@ function NavBar({isLoggedIn, logOut}) {
           Jobs
         </NavLink>
         <p></p>
-        <NavLink to="/profile">
+        <NavLink patch={patch} to="/profile">
           Profile
         </NavLink>
         <p></p>
-        <NavLink onClick={(e)=>logOut(e)} to="/">
+        <NavLink onClick={logOut} to="/">
           Logout
         </NavLink>
       </div> :

@@ -69,12 +69,20 @@ class JoblyApi {
     return res.token;
   }
 
-  // obviously, you'll add a lot here ...
-}
+  /** Gets a single user. */
 
-// for now, put token ("testuser" / "password" on class)
-// JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-//     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-//     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res;
+  }
+
+  /** Patches a user. */
+
+  static async patchUser(username, formData) {
+    let res = await this.request(`users/${username}`, formData, "patch");
+    return res;
+  }
+
+}
 
 export default JoblyApi;
