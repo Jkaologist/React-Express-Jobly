@@ -11,7 +11,7 @@ function CompanyDetail() {
 
   useEffect(function makeList() {
     getCompanyDetail();
-  }, [handle])
+  })
 
   async function getCompanyDetail() {
     try{
