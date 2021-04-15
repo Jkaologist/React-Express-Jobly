@@ -16,7 +16,7 @@ function Routes({login, signup, patch, apply}) {
         <Homepage />
         </Route>
         <Route exact path="/login">
-          <LogInForm login={login} />
+          <LogInForm login={login}/>
         </Route>
         <Route exact path="/signup">
           <SignupForm signup={signup}/>

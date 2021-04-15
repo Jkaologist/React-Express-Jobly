@@ -10,8 +10,6 @@ function Jobs({apply}) {
   const [jobs, setJobs] = useState(null);
   const History = useHistory();
   const user = useContext(UserContext);
-
-  console.log(user);
   
   useEffect(function makeList() {
     jobsList()

@@ -3,8 +3,9 @@ import UserContext from "./UserContext";
 
 function JobCard({title, apply, equity, salary, id, companyName=undefined}) {
 
-    const user = useContext(UserContext); 
+  const user = useContext(UserContext);
 
+  console.log("This is the user,", user);
   return (
     <div style={{boxShadow: "0px 1px 5px black", padding: "15px", margin: "15px"}} >
       <h2>{title}</h2>
