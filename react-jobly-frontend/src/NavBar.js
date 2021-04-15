@@ -1,10 +1,14 @@
 import {NavLink} from "react-router-dom";
+import {useContext} from "react";
+import UserContext from "./UserContext";
 
-function NavBar({isLoggedIn, logOut, patch}) {
+function NavBar({logOut}) {
+
+  const {loggedIn} = useContext(UserContext);
 
   return (
     <div>
-      { isLoggedIn() ? <div>
+      { loggedIn ? <div>
         <NavLink to="/">
           Home
         </NavLink>
@@ -17,7 +21,7 @@ function NavBar({isLoggedIn, logOut, patch}) {
           Jobs
         </NavLink>
         <p></p>
-        <NavLink patch={patch} to="/profile">
+        <NavLink to="/profile">
           Profile
         </NavLink>
         <p></p>

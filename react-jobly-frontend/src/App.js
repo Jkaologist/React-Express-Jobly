@@ -33,9 +33,17 @@ function App() {
     }
   }
 
-  function isLoggedIn() {
-    return user.loggedIn
+  async function apply(jobId) {
+    console.log("username:", user.username, " jobId:", jobId);
+    let res = await JoblyApi.applyUser(user.username, jobId);
+    if (!res.error) {
+      setUser(user => ({...user, applications:[...user.applications, res.jobId]}));
+      History.push("/jobs")
+    } else {
+    console.alert("You failed to apply.")
+    }
   }
+
 
   function logOut(e) {
     e.preventDefault();
@@ -55,8 +63,8 @@ function App() {
   return (
     <div>
       <UserContext.Provider value={user}>
-        <NavBar logOut={logOut} isLoggedIn={isLoggedIn} patch={patch}/>
-        <Routes login={login} signup={signup} patch={patch} isLoggedIn={isLoggedIn} />
+        <NavBar logOut={logOut} patch={patch}/>
+        <Routes login={login} signup={signup} patch={patch} apply={apply} />
       </UserContext.Provider>
     </div>
   );

@@ -6,10 +6,12 @@ import Loading from "./Loading";
 import JobCard from "./JobCard";
 import UserContext from "./UserContext";
 
-function Jobs() {
+function Jobs({apply}) {
   const [jobs, setJobs] = useState(null);
   const History = useHistory();
   const user = useContext(UserContext);
+
+  console.log(user);
   
   useEffect(function makeList() {
     jobsList()
@@ -32,7 +34,7 @@ function Jobs() {
     <div>
       {
         jobs.map(j => (
-        <JobCard key={j.id} title={j.title} companyName={j.companyName} salary={j.salary} equity={j.equity}/>
+        <JobCard apply={apply} key={j.id} title={j.title} id={j.id} companyName={j.companyName} salary={j.salary} equity={j.equity}/>
         ))
       }
     </div>

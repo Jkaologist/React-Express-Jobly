@@ -7,7 +7,7 @@ import CompanyDetail from "./CompanyDetail";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 
-function Routes({login, signup, patch}) {
+function Routes({login, signup, patch, apply}) {
 
   return (
     <div>
@@ -28,10 +28,10 @@ function Routes({login, signup, patch}) {
           <Companies />
         </Route>
         <Route exact path="/jobs">
-          <Jobs />
+          <Jobs apply={apply}/>
         </Route>
         <Route exact path="/companies/:handle">
-          <CompanyDetail />
+          <CompanyDetail apply={apply}/>
         </Route>
       </Switch>
     </div>

@@ -83,6 +83,13 @@ class JoblyApi {
     return res;
   }
 
+    /** Applies a user to a job. */
+
+    static async applyUser(username, jobId) {
+      let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
+      return res;
+    }
+
 }
 
 export default JoblyApi;

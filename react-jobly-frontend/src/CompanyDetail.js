@@ -5,7 +5,7 @@ import Loading from "./Loading";
 import JobCard from "./JobCard";
 import UserContext from "./UserContext";
 
-function CompanyDetail() {
+function CompanyDetail({apply}) {
 
   const { handle } = useParams();
   const [company, setCompany] = useState(null);
@@ -40,7 +40,7 @@ function CompanyDetail() {
       <p>{company.description}</p>
       <div>
         {company.jobs.map(job => (
-          <JobCard key={job.id} title={job.title} equity={job.equity} salary={job.salary} />
+          <JobCard apply={apply} key={job.id} id={job.id} title={job.title} equity={job.equity} salary={job.salary} />
         ))}
       </div>
     </div>
