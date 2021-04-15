@@ -1,5 +1,5 @@
 import './App.css';
-import {useContext, useState, useEffect} from "react"
+import {useState, useEffect} from "react"
 import {useHistory} from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
@@ -10,8 +10,21 @@ import useLocalStorage from "./hooks/LocalStorage"
 function App() {
   const History = useHistory();
   const [user, setUser] = useState({loggedIn: false});
-  const [currUser, setcurrUser] = useLocalStorage("username");
+  const [currUser, setCurrUser] = useLocalStorage("username");
   const [token, setToken] = useLocalStorage("token");
+
+  useEffect(function checksLoggedIn() {
+    async function LogInWithResLocals() {
+      if (token) {
+        JoblyApi.token = token
+        let resp = await JoblyApi.getUser(currUser)
+        setUser(user => ({...resp.user ,loggedIn: true, token: token}));
+      } else {
+        History.push("/")
+      }
+    }
+    LogInWithResLocals()
+  }, [token, History, currUser]);
 
   async function patch(formData) {
     let {username, ...data} = formData;
@@ -20,24 +33,20 @@ function App() {
       setUser(user => ({...user, ...res.user}));
       History.push("/companies")
     } else {
-    console.alert("You failed to register.")
+    alert("You failed to register.")
     }
   }
-
-  // function isLoggedIn() {
-  //   useEffect(()=>, [user.loggedIn])
-  // }
 
   async function login(formData) {
     let res = await JoblyApi.login(formData);
     if (!res.error) {
       let resp = await JoblyApi.getUser(formData.username)
       setUser(user => ({...resp.user ,loggedIn: true, token: res}));
-      setcurrUser(resp.user.username);
+      setCurrUser(resp.user.username);
       setToken(res);
       History.push("/companies");
     } else {
-    console.alert("You failed to login.")
+    alert("You failed to login.")
     }
   }
 
@@ -47,13 +56,15 @@ function App() {
       setUser(user => ({...user, applications:[...user.applications, jobId]}));
       History.push("/jobs")
     } else {
-    console.alert("You failed to apply.")
+    alert("You failed to apply.")
     }
   }
 
 
   function logOut(e) {
     e.preventDefault();
+    setToken(undefined)
+    setCurrUser(undefined)
     setUser(user => ({loggedIn:false}));
   }
 
@@ -62,7 +73,7 @@ function App() {
     if (!res.error) {
       setUser(user => ({...user, loggedIn: true, token: res}));
     } else {
-    console.alert("You failed to register.")
+    alert("You failed to register.")
     }
   }
 
