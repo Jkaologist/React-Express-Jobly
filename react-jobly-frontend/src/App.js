@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from "react"
+import {useContext, useState, useEffect} from "react"
 import {useHistory} from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
@@ -10,7 +10,8 @@ import useLocalStorage from "./hooks/LocalStorage"
 function App() {
   const History = useHistory();
   const [user, setUser] = useState({loggedIn: false});
-  const {val, setVal} = useLocalStorage("username");
+  const [currUser, setcurrUser] = useLocalStorage("username");
+  const [token, setToken] = useLocalStorage("token");
 
   async function patch(formData) {
     let {username, ...data} = formData;
@@ -23,12 +24,17 @@ function App() {
     }
   }
 
+  // function isLoggedIn() {
+  //   useEffect(()=>, [user.loggedIn])
+  // }
+
   async function login(formData) {
     let res = await JoblyApi.login(formData);
     if (!res.error) {
       let resp = await JoblyApi.getUser(formData.username)
       setUser(user => ({...resp.user ,loggedIn: true, token: res}));
-      setVal(user.username)
+      setcurrUser(resp.user.username);
+      setToken(res);
       History.push("/companies");
     } else {
     console.alert("You failed to login.")
@@ -64,8 +70,7 @@ function App() {
   return (
     <div>
       <UserContext.Provider value={user}>
-        <p>Welcome back {val || "NewUser"}! We remembered you in LocalStorage!</p>
-        <NavBar logOut={logOut} patch={patch}/>
+        <NavBar logOut={logOut} patch={patch} />
         <Routes login={login} signup={signup} patch={patch} apply={apply} />
       </UserContext.Provider>
     </div>

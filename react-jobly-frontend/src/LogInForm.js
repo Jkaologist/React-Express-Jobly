@@ -6,8 +6,8 @@ function LogInForm({login}) {
     password: ""
   })
   function handleSubmit(e) {
-    e.preventDefault()
-    login(formData)
+    e.preventDefault();
+    login(formData);
   }
   function handleChange(e) {
     const {name, value} = e.target;
